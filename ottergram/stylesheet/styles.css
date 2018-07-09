@@ -20,6 +20,12 @@ body {
   flex-direction: column;
   font-size: 10px;
 }
+.button2{
+  position: relative;
+}
+.button1{
+  position: relative;
+}
 
 a[href="#"] {
   text-decoration: none;
@@ -39,6 +45,7 @@ a[href="#"] {
 .detail-image-frame {
   position: relative;
   text-align: center;
+  transition: transform 333ms cubic-bezier(1,.06,.28,1);
 }
 
 .detail-image-title {
@@ -65,6 +72,10 @@ html, body {
   height: 100%;
 }
 
+.is-tiny{
+  transform: scale(0.001);
+  transition: transform 0ms;
+}
 .logo-text {
   background: white;
   font-family: lakeshore;
@@ -89,8 +100,12 @@ html, body {
   display: inline-block;
   max-width: 120px;
   min-width: 120px;
+  transition: transform 133ms ease-in-out;
 }
 
+.thumbnail-item:hover{
+  transform: scale(1.2);
+}
 .thumbnail-list {
   display: flex;
   flex: 0 1 auto;
@@ -98,7 +113,7 @@ html, body {
   list-style: none;
   order: 2;
   overflow-x: auto;
-  padding: 0;
+  padding: 20px 0;
   white-space: nowrap;
 }
 
@@ -125,6 +140,7 @@ html, body {
     flex-direction: column;
     margin-left: 20px;
     order: 0;
+    padding: 0 35px;
   }
   .thumbnail-item {
     max-width: 260px;
