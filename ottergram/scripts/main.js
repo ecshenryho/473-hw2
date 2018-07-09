@@ -1,7 +1,9 @@
 var DETAIL_IMAGE_SELECTOR='[data-image-role="target"]';
 var DETAIL_TITLE_SELECTOR='[data-image-role="title"]';
+var DETAIL_FRAME_SELECTOR='[data-image-role="frame"]';
 var THUMBNAIL_LINK_SELECTOR='[data-image-role="trigger"]';
 var HIDDEN_DETAIL_CLASS='hidden-detail';
+var TINY_EFFECT_CLASS='is-tiny';
 var ESC_KEY=27;
 
 function setDetails(imageUrl,titleText){
@@ -50,7 +52,12 @@ function hideDetails(){
 
 function showDetails(){
   'use strict';
+  var frame=document.querySelector(DETAIL_FRAME_SELECTOR);
   document.body.classList.remove(HIDDEN_DETAIL_CLASS);
+  frame.classList.add(TINY_EFFECT_CLASS);
+  setTimeout(function(){
+    frame.classList.remove(TINY_EFFECT_CLASS);
+  },50);
 }
 
 function addKeyPressHandler(){
@@ -69,6 +76,27 @@ function initializeEvents() {
   var thumbnails=getThumbnailsArray();
   thumbnails.forEach(addThumbClickHandler);
   addKeyPressHandler();
+}
+
+var i=0, images=["img/otter1.jpg",
+                "img/otter2.jpg",
+                "img/otter3.jpg",
+                "img/otter4.jpg",
+                "img/otter5.jpg"];
+function myslide(click){
+  if (click==='next')
+  {
+    i++;
+    if (i===images.length) {i=images.length-1;}
+  }
+
+  else
+  {
+      i--;
+      if (i<0) {i=0;}
+  }
+  document.getElementById('slide').src=images[i];
+
 }
 
 initializeEvents();
