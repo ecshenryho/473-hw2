@@ -5,6 +5,7 @@ var THUMBNAIL_LINK_SELECTOR='[data-image-role="trigger"]';
 var HIDDEN_DETAIL_CLASS='hidden-detail';
 var TINY_EFFECT_CLASS='is-tiny';
 var ESC_KEY=27;
+var current=0;
 
 function setDetails(imageUrl,titleText){
   'use strict';
@@ -78,25 +79,31 @@ function initializeEvents() {
   addKeyPressHandler();
 }
 
-var i=0, images=["img/otter1.jpg",
-                "img/otter2.jpg",
-                "img/otter3.jpg",
-                "img/otter4.jpg",
-                "img/otter5.jpg"];
-function myslide(click){
-  if (click==='next')
-  {
-    i++;
-    if (i===images.length) {i=images.length-1;}
-  }
-
-  else
-  {
-      i--;
-      if (i<0) {i=0;}
-  }
-  document.getElementById('slide').src=images[i];
-
+function initializeEvents1() {
+  'use strict';
+  var thumbnails = getThumbnailsArray();
+  thumbnails.forEach(function(thumb, index) {
+    thumb.addEventListener('click', function(event) {
+      event.preventDefault();
+      if (index == 5) {
+        if (current <= 0) {
+          current = 5;
+        }
+        thumb = thumbnails[current - 1];
+        current--;
+      } else if (index == 6) {
+        if (current >= 4) {
+          current = -1;
+        }
+        thumb = thumbnails[current + 1];
+        current++;
+      }
+      else {
+        current = index;
+      }
+      setDetailsFromThumb(thumb);
+    });
+  });
 }
-
 initializeEvents();
+initializeEvents1();
